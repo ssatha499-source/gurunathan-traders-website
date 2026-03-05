@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ shop.name }} | Products{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h1>Product Catalog</h1>
+      <p>Search products and filter by category before visiting the shop.</p>
+    </div>
+
+    <form class="filter-form" method="get" action="{{ url_for('products') }}">
+      <input type="text" name="q" value="{{ search }}" placeholder="Search by name or description" />
+      <select name="category">
+        <option value="">All Categories</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}" {% if active_category|int == category.id %}selected{% endif %}>{{ category.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary">Apply</button>
+      <a href="{{ url_for('products') }}" class="btn btn-outline">Reset</a>
+    </form>
+
+    <div class="product-grid">
+      {% for item in products %}
+      <article class="product-card">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}" loading="lazy" />
+        <div class="product-meta">
+          <span class="chip">{{ item.category_name }}</span>
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <strong>Rs. {{ '%.2f'|format(item.price) }}</strong>
+          <a class="btn btn-secondary" href="https://wa.me/{{ shop.whatsapp }}?text=I%20am%20interested%20in%20{{ item.name|replace(' ', '%20') }}" target="_blank" rel="noopener">WhatsApp Inquiry</a>
+        </div>
+      </article>
+      {% else %}
+      <p>No products found for your filter.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

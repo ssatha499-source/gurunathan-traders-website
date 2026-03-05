@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}{{ shop.name }} | Contact{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container contact-grid">
+    <div>
+      <div class="section-title-wrap left">
+        <h1>Contact Our Shop</h1>
+        <p>Call, WhatsApp, or send a quick message. We will respond as soon as possible.</p>
+      </div>
+      <div class="contact-cards">
+        <div class="info-card">
+          <h3>Phone</h3>
+          <p>{{ shop.phone }}</p>
+        </div>
+        <div class="info-card">
+          <h3>WhatsApp</h3>
+          <a class="btn btn-secondary" href="https://wa.me/{{ shop.whatsapp }}?text=Hello%20I%20need%20hardware%20materials" target="_blank" rel="noopener">Chat Now</a>
+        </div>
+        <div class="info-card">
+          <h3>Address</h3>
+          <p>{{ shop.address }}</p>
+        </div>
+      </div>
+      <iframe class="map" title="Gurunathan Traders Location" src="https://maps.google.com/maps?q=Hosur%20Tamil%20Nadu&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+    </div>
+
+    <form class="contact-form" method="post" action="{{ url_for('contact') }}">
+      <h2>Send Inquiry</h2>
+      <label>Name *</label>
+      <input type="text" name="name" required />
+
+      <label>Phone *</label>
+      <input type="text" name="phone" required />
+
+      <label>Email</label>
+      <input type="email" name="email" />
+
+      <label>Message *</label>
+      <textarea name="message" rows="5" required></textarea>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

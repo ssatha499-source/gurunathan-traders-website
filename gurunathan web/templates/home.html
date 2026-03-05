@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}{{ shop.name }} | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Serving Hosur & Nearby Villages</p>
+      <h1>{{ shop.name }}</h1>
+      <p class="hero-tagline">{{ shop.tagline }}</p>
+      <p class="hero-text">From daily plumbing needs to contractor bulk supply, we help local workers and families get quality materials at fair prices.</p>
+      <div class="hero-actions">
+        <a href="{{ url_for('products') }}" class="btn btn-primary">View Products</a>
+        <a href="{{ url_for('contact') }}" class="btn btn-outline">Contact Us</a>
+        <a href="https://wa.me/{{ shop.whatsapp }}?text=I%20want%20to%20place%20an%20order" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp Order</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Why locals choose us</h3>
+      <ul>
+        <li>Trusted supplier for plumbers, electricians and painters</li>
+        <li>Strong stock in pipes, wires, tools and paints</li>
+        <li>Support for bulk orders and site delivery planning</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2>Product Categories</h2>
+      <p>Everything you need for home repair and construction work.</p>
+    </div>
+    <div class="category-grid">
+      {% for category in categories %}
+      <article class="category-card">
+        <img src="{{ category.image_url }}" alt="{{ category.name }}" loading="lazy" />
+        <h3>{{ category.name }}</h3>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2>Featured Products</h2>
+      <p>Updated selections from our store counter.</p>
+    </div>
+    <div class="product-grid">
+      {% for item in featured %}
+      <article class="product-card">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}" loading="lazy" />
+        <div class="product-meta">
+          <span class="chip">{{ item.category_name }}</span>
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.description }}</p>
+          <strong>Rs. {{ '%.2f'|format(item.price) }}</strong>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

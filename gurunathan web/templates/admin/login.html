@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<div class="admin-login-card">
+  <h2>Admin Login</h2>
+  <p>Default login for first use: <strong>admin / Admin@123</strong></p>
+  <form method="post" class="contact-form">
+    <label>Username</label>
+    <input type="text" name="username" required />
+
+    <label>Password</label>
+    <input type="password" name="password" required />
+
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+</div>
+{% endblock %}
